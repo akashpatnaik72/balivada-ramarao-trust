@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 20% 96%;
+    --foreground: 180 6% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 180 6% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 180 6% 7%;
+    --primary: 180 6% 7%;
+    --primary-foreground: 40 23% 94%;
+    --secondary: 40 23% 94%;
+    --secondary-foreground: 180 6% 7%;
+    --muted: 80 3% 85%;
+    --muted-foreground: 180 6% 35%;
+    --accent: 71 64% 52%;
+    --accent-foreground: 180 6% 7%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 96 3% 88%;
+    --input: 96 3% 88%;
+    --ring: 71 64% 52%;
+    --radius: 1.25rem;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #faf9f5;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(183, 211, 52, 0.06), transparent 24rem),
+    #faf9f5;
+  color: hsl(var(--foreground));
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(183, 211, 52, 0.42);
+  color: #101212;
+}
+
+.font-display {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 96;
+  letter-spacing: -0.025em;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.shadow-soft {
+  box-shadow: 0 1px 2px rgba(16, 18, 18, 0.025), 0 18px 42px -20px rgba(16, 18, 18, 0.16);
+}
+
+.shadow-lift {
+  box-shadow: 0 2px 4px rgba(16, 18, 18, 0.04), 0 32px 70px -26px rgba(16, 18, 18, 0.2);
+}
+
+.editorial-rule {
+  position: relative;
+}
+
+.editorial-rule::after {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  margin-top: 1.25rem;
+  background: #b7d334;
+  transform-origin: left center;
+}
+
+.image-reveal {
+  clip-path: inset(0 0 0 0 round 1.5rem);
+  transition: clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-reveal:hover {
+  transform: scale(1.018);
+}
+
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ripple-btn > .ripple {
+  position: absolute;
+  border-radius: 9999px;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.5);
+  animation: ripple 620ms ease-out forwards;
+  pointer-events: none;
+}
+
+.ripple-btn.ripple-dark > .ripple {
+  background: rgba(16, 18, 18, 0.1);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+@keyframes heart-breathe {
+  0%, 100% { transform: scale(0.985); opacity: 0.96; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+.hero-heart-breathe {
+  animation: heart-breathe 4.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes orbit-drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-orbit-drift {
+  animation: orbit-drift 26s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 400ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee, .animate-floaty, .animate-shake, .hero-heart-breathe, .hero-orbit-drift {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-orbit-drift { animation-duration: 34s; }
+}
